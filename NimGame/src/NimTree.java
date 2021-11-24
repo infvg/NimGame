@@ -93,7 +93,6 @@ public class NimTree {
 
 		private int getBestMove() {
 			if (player == 1) {
-				System.out.println("player 1: " + MinMax(oneLess) + " " + MinMax(twoLess));
 				if (MinMax(oneLess) > MinMax(twoLess))
 					return 2;
 				return 1;

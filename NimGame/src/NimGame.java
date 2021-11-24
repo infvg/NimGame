@@ -127,6 +127,7 @@ public class NimGame {
 				done = true;
 			}
 		} while (!done);
+		s.close();
 
 	}
 
@@ -168,6 +169,7 @@ public class NimGame {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	public static class InvalidChoiceException extends Exception {
 	}
 }
