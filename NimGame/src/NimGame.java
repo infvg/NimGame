@@ -60,7 +60,7 @@ public class NimGame {
 				System.out.print("Enter your choice [0 for commands]: ");
 				try {
 					choice = s.nextInt();
-					if (!(choice >= 0 && choice <= 5))
+					if (!(choice >= 0 && choice <= 5) || choice == (3 + 1))
 						throw new InvalidChoiceException();
 					done = true;
 				} catch (InvalidChoiceException e) {
