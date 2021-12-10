@@ -10,7 +10,11 @@ public class NimGame {
 			System.out.print("Enter how many coins to play with: ");
 			try {
 				coins = s.nextInt();
+				if (coins < 1)
+					throw new InvalidChoiceException();
 				done = true;
+			} catch (InvalidChoiceException e) {
+				System.out.println("\nYou cannot have less than 1 coins!\n");
 			} catch (Exception e) {
 				s.next();
 				System.out.println("\nValid input is an integer! \n");
@@ -57,6 +61,22 @@ public class NimGame {
 		do {
 			printCoins(tree);
 			do {
+				if (tree.getCurrentCoins() == 0) {
+					if (tree.getWinner() == 1) {
+						if (player == 1)
+							System.out.println("\nThe AI won!\n");
+						else
+							System.out.println("\nYou win!\n");
+					} else {
+						if (player == 1)
+							System.out.println("\nYou win!\n");
+						else
+							System.out.println("\nThe AI won!\n");
+					}
+					done = true;
+					s.close();
+					return;
+				}
 				System.out.print("Enter your choice [0 for commands]: ");
 				try {
 					choice = s.nextInt();
@@ -139,7 +159,7 @@ public class NimGame {
 				dif -= 1;
 		switch (dif) {
 		case 1:
-			if (Math.random() > 0.5 && tree.canRemoveTwo()) {
+			if (tree.canRemoveTwo() && Math.random() > 0.5) {
 				tree.removeTwo();
 				System.out.println("\nThe AI removed two coins\n");
 			} else {
@@ -148,7 +168,7 @@ public class NimGame {
 			}
 			break;
 		case 3:
-			if (tree.nextBestMove() == 2 && tree.canRemoveTwo()) {
+			if (tree.canRemoveTwo() && tree.nextBestMove() == 2) {
 				tree.removeTwo();
 				System.out.println("\nThe AI removed two\n");
 			} else {
